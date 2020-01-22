@@ -28,6 +28,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
 
 import android.app.ActivityManager;
+import android.app.AppOpsManager;
 import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -251,7 +252,11 @@ public abstract class TelephonyTest {
     protected SubscriptionManager mSubscriptionManager;
     protected EuiccManager mEuiccManager;
     protected PackageManager mPackageManager;
+<<<<<<< HEAD
     protected ConnectivityManager mConnectivityManager;
+=======
+    protected AppOpsManager mAppOpsManager;
+>>>>>>> 1efc99396... Guard ICC ID behind new identifier access requirements
     protected SimulatedCommands mSimulatedCommands;
     protected ContextFixture mContextFixture;
     protected Context mContext;
@@ -380,6 +385,7 @@ public abstract class TelephonyTest {
         mConnectivityManager = (ConnectivityManager)
                 mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         mPackageManager = mContext.getPackageManager();
+        mAppOpsManager = (AppOpsManager) mContext.getSystemService(Context.APP_OPS_SERVICE);
 
         //mTelephonyComponentFactory
         doReturn(mTelephonyComponentFactory).when(mTelephonyComponentFactory).inject(anyString());
@@ -676,6 +682,13 @@ public abstract class TelephonyTest {
         mApplicationInfo.targetSdkVersion = Build.VERSION_CODES.Q;
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfoAsUser(eq(TAG), anyInt(),
                 anyInt());
+
+        // TelephonyPermissions also checks to see if the calling package has been granted
+        // identifier access via an appop; ensure this query does not allow identifier access for
+        // any packages.
+        doReturn(AppOpsManager.MODE_DEFAULT).when(mAppOpsManager).noteOpNoThrow(
+                eq(AppOpsManager.OPSTR_READ_DEVICE_IDENTIFIERS), anyInt(), anyString(),
+                nullable(String.class), nullable(String.class));
 
         // TelephonyPermissions queries DeviceConfig to determine if the identifier access
         // restrictions should be enabled; this results in a NPE when DeviceConfig uses
