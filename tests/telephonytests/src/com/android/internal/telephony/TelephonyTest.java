@@ -252,11 +252,8 @@ public abstract class TelephonyTest {
     protected SubscriptionManager mSubscriptionManager;
     protected EuiccManager mEuiccManager;
     protected PackageManager mPackageManager;
-<<<<<<< HEAD
     protected ConnectivityManager mConnectivityManager;
-=======
     protected AppOpsManager mAppOpsManager;
->>>>>>> 1efc99396... Guard ICC ID behind new identifier access requirements
     protected SimulatedCommands mSimulatedCommands;
     protected ContextFixture mContextFixture;
     protected Context mContext;

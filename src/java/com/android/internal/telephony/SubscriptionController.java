@@ -3359,15 +3359,10 @@ public class SubscriptionController extends ISub.Stub {
             int subId = info.getSubscriptionId();
             return TelephonyPermissions.checkCallingOrSelfReadPhoneState(mContext, subId,
                     callingPackage, "getSubscriptionsInGroup")
-<<<<<<< HEAD
                     || info.canManageSubscription(mContext, callingPackage);
-        }).collect(Collectors.toList());
-=======
-                    || (info.isEmbedded() && info.canManageSubscription(mContext, callingPackage));
         }).map(subscriptionInfo -> conditionallyRemoveIdentifiers(subscriptionInfo,
                 callingPackage, "getSubscriptionsInGroup"))
         .collect(Collectors.toList());
->>>>>>> 1efc99396... Guard ICC ID behind new identifier access requirements
     }
 
     public ParcelUuid getGroupUuid(int subId) {
