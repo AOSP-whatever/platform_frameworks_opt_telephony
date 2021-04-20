@@ -31,7 +31,10 @@ import static android.telephony.TelephonyManager.EXTRA_SUBSCRIPTION_ID;
 import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.app.PendingIntent;
+<<<<<<< HEAD
 import android.content.BroadcastReceiver;
+=======
+>>>>>>> 3171614f743e6e0ce259bb1b8faf62853cb2fe00
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -307,7 +310,13 @@ public class MultiSimSettingController extends Handler {
     private void onAllSubscriptionsLoaded() {
         if (DBG) log("onAllSubscriptionsLoaded");
         mSubInfoInitialized = true;
+<<<<<<< HEAD
         reEvaluateAll();
+=======
+        updateDefaults(/*init*/ true);
+        disableDataForNonDefaultNonOpportunisticSubscriptions();
+        deactivateGroupedOpportunisticSubscriptionIfNeeded();
+>>>>>>> 3171614f743e6e0ce259bb1b8faf62853cb2fe00
     }
 
     /**
@@ -785,7 +794,11 @@ public class MultiSimSettingController extends Handler {
         }
     }
 
+<<<<<<< HEAD
     protected void log(String msg) {
+=======
+    private void log(String msg) {
+>>>>>>> 3171614f743e6e0ce259bb1b8faf62853cb2fe00
         Log.d(LOG_TAG, msg);
     }
 

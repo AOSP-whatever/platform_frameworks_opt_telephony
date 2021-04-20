@@ -3359,7 +3359,11 @@ public class SubscriptionController extends ISub.Stub {
             int subId = info.getSubscriptionId();
             return TelephonyPermissions.checkCallingOrSelfReadPhoneState(mContext, subId,
                     callingPackage, "getSubscriptionsInGroup")
+<<<<<<< HEAD
                     || info.canManageSubscription(mContext, callingPackage);
+=======
+                    || (info.isEmbedded() && info.canManageSubscription(mContext, callingPackage));
+>>>>>>> 3171614f743e6e0ce259bb1b8faf62853cb2fe00
         }).map(subscriptionInfo -> conditionallyRemoveIdentifiers(subscriptionInfo,
                 callingPackage, "getSubscriptionsInGroup"))
         .collect(Collectors.toList());

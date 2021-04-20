@@ -252,7 +252,10 @@ public abstract class TelephonyTest {
     protected SubscriptionManager mSubscriptionManager;
     protected EuiccManager mEuiccManager;
     protected PackageManager mPackageManager;
+<<<<<<< HEAD
     protected ConnectivityManager mConnectivityManager;
+=======
+>>>>>>> 3171614f743e6e0ce259bb1b8faf62853cb2fe00
     protected AppOpsManager mAppOpsManager;
     protected SimulatedCommands mSimulatedCommands;
     protected ContextFixture mContextFixture;
